@@ -16,5 +16,4 @@ public class DrawPicture extends JComponent {
     public ITransport getTransport(){
         return transport;
     }
-
 }

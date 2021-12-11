@@ -9,7 +9,6 @@ public class RocketsDop implements IRockets {
         this.count = countRockets;
         SetEnumRockets(count);
     }
-
     @Override
     public void SetEnumRockets(int countRockets){
         this.rocketsEnum = RocketsEnum.setEnumNumber(countRockets);

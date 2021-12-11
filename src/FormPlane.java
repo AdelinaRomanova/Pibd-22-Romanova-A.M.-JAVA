@@ -24,7 +24,6 @@ public class FormPlane {
     public FormPlane() {
         framePlane = new JFrame("Штурмовик");
         framePlane.setSize(new Dimension(900, 500));
-        framePlane.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         draw = new DrawPicture();
 
         btnCreateWarplane.addActionListener(e -> setWarplane());
@@ -51,21 +50,30 @@ public class FormPlane {
         framePlane.setVisible(true);
     }
 
-    private void setWarplane(){
-        Random rnd = new Random();
-        draw.setTransport(new Warplane(rnd.nextInt(200)+100, rnd.nextInt(500)+1000, Color.BLACK));
-        draw.getTransport().SetPosition(rnd.nextInt(590) + 10, rnd.nextInt(150) + 20, panelPlane.getWidth(), panelPlane.getHeight()-panelNavig.getHeight() - panelButton.getHeight() );
-        panelPlane.add(draw);
-        framePlane.repaint();
-        framePlane.setVisible(true);
-    }
+        private void setWarplane(){
+            Random rnd = new Random();
+            draw.setTransport(new Warplane(rnd.nextInt(200)+100, rnd.nextInt(500)+1000, Color.BLACK));
+            draw.getTransport().SetPosition(rnd.nextInt(590) + 10, rnd.nextInt(150) + 20, panelPlane.getWidth(), panelPlane.getHeight()-panelNavig.getHeight() - panelButton.getHeight() );
+            panelPlane.add(draw);
+            framePlane.repaint();
+            framePlane.setVisible(true);
+        }
 
-    private void setStormtrooper(){
-        Random rnd = new Random();
-        draw.setTransport(new Stormtrooper(rnd.nextInt(200)+100, rnd.nextInt(2000)+1000, Color.BLUE, Color.BLACK, true, true, comboBoxRockets.getSelectedIndex(), comboBoxTypeRock.getSelectedItem().toString()));
-        draw.getTransport().SetPosition(rnd.nextInt(590) + 10, rnd.nextInt(150) + 20, panelPlane.getWidth(), panelPlane.getHeight()-panelNavig.getHeight()-panelButton.getHeight() );
-        panelPlane.add(draw);
-        framePlane.repaint();
-        framePlane.setVisible(true);
+        private void setStormtrooper(){
+            Random rnd = new Random();
+            draw.setTransport(new Stormtrooper(rnd.nextInt(200)+100, rnd.nextInt(2000)+1000, Color.BLUE, Color.BLACK, true, true, comboBoxRockets.getSelectedIndex(), comboBoxTypeRock.getSelectedItem().toString()));
+            draw.getTransport().SetPosition(rnd.nextInt(100), rnd.nextInt(100), panelPlane.getWidth(), panelPlane.getHeight()-panelNavig.getHeight()-panelButton.getHeight() );
+            panelPlane.add(draw);
+            framePlane.repaint();
+            framePlane.setVisible(true);
+        }
+
+        public void setVehicle(ITransport transport){
+            Random rnd = new Random();
+            draw.setTransport(transport);
+            draw.getTransport().SetPosition(rnd.nextInt(100), rnd.nextInt(100), panelPlane.getWidth(), panelPlane.getHeight()-panelNavig.getHeight()-panelButton.getHeight() );
+            panelPlane.add(draw);
+            framePlane.repaint();
+            framePlane.setVisible(true);
     }
 }
