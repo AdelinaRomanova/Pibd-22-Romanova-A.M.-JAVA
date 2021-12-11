@@ -27,7 +27,6 @@ public class Stormtrooper extends Warplane {
     public void setRockets(boolean Rockets) { Rockets = Rockets; }
 
     private IRockets TypeRockets;
-    private RocketsDop rockets;
 
     public Stormtrooper(int maxSpeed, int weight, Color mainColor, Color dopColor, boolean turbo, boolean rockets, int countRockets, String typeRockets)
     {
@@ -51,6 +50,8 @@ public class Stormtrooper extends Warplane {
     //Отрисовка штурмовика
     public void DrawTransport(Graphics g)
     {
+        Color col2 = new Color(127, 127, 127);
+        Color col1 = new Color(0,0,0);
         Color col5 = new Color(240, 96, 0);
         Color col4 = new Color(239, 52, 62);
         if (GetTurbo())
