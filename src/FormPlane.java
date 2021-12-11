@@ -7,6 +7,7 @@ public class FormPlane {
     private JPanel panelButton;
     private JPanel panelNavig;
 
+    private JButton btnCreateWarplane;
     private JButton btnCreateStorm;
     private JButton buttonLeft;
     private JButton buttonUp;
@@ -15,43 +16,56 @@ public class FormPlane {
     private JPanel panelBtnNavig;
 
     private JComboBox<String> comboBoxRockets;
+    private JComboBox<String> comboBoxTypeRock;
 
     private DrawPicture draw;
-    private JFrame frameStormtrooper;
+    private JFrame framePlane;
 
     public FormPlane() {
-        frameStormtrooper = new JFrame("Штурмовик");
-        frameStormtrooper.setSize(new Dimension(900, 500));
-        frameStormtrooper.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        framePlane = new JFrame("Штурмовик");
+        framePlane.setSize(new Dimension(900, 500));
+        framePlane.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         draw = new DrawPicture();
 
-        btnCreateStorm.addActionListener(e -> setPlane());
+        btnCreateWarplane.addActionListener(e -> setWarplane());
+        btnCreateStorm.addActionListener(e -> setStormtrooper());
 
         buttonUp.addActionListener(e ->{
             draw.getTransport().MoveTransport(Direction.Up);
-            frameStormtrooper.repaint();
+            framePlane.repaint();
         });
         buttonDown.addActionListener(e ->{
             draw.getTransport().MoveTransport(Direction.Down);
-            frameStormtrooper.repaint();
+            framePlane.repaint();
         });
         buttonRight.addActionListener(e ->{
             draw.getTransport().MoveTransport(Direction.Right);
-            frameStormtrooper.repaint();
+            framePlane.repaint();
         });
         buttonLeft.addActionListener(e ->{
             draw.getTransport().MoveTransport(Direction.Left);
-            frameStormtrooper.repaint();
+            framePlane.repaint();
         });
-        frameStormtrooper.add(panelPlane);
-        frameStormtrooper.setVisible(true);
+
+        framePlane.add(panelPlane);
+        framePlane.setVisible(true);
     }
-    private void setPlane(){
-            Random rnd = new Random();
-            draw.setTransport(new Stormtrooper(rnd.nextInt(200)+100, rnd.nextInt(500)+1000, Color.BLACK, Color.GRAY, true, true, comboBoxRockets.getSelectedIndex()));
-            draw.getTransport().SetPosition(rnd.nextInt(590) + 10, rnd.nextInt(150) + 20, panelPlane.getWidth(), panelPlane.getHeight()-panelNavig.getHeight()-panelNavig.getHeight() - panelButton.getHeight() );
-            panelPlane.add(draw);
-            frameStormtrooper.repaint();
-            frameStormtrooper.setVisible(true);
-        }
+
+    private void setWarplane(){
+        Random rnd = new Random();
+        draw.setTransport(new Warplane(rnd.nextInt(200)+100, rnd.nextInt(500)+1000, Color.BLACK));
+        draw.getTransport().SetPosition(rnd.nextInt(590) + 10, rnd.nextInt(150) + 20, panelPlane.getWidth(), panelPlane.getHeight()-panelNavig.getHeight() - panelButton.getHeight() );
+        panelPlane.add(draw);
+        framePlane.repaint();
+        framePlane.setVisible(true);
     }
+
+    private void setStormtrooper(){
+        Random rnd = new Random();
+        draw.setTransport(new Stormtrooper(rnd.nextInt(200)+100, rnd.nextInt(2000)+1000, Color.BLUE, Color.BLACK, true, true, comboBoxRockets.getSelectedIndex(), comboBoxTypeRock.getSelectedItem().toString()));
+        draw.getTransport().SetPosition(rnd.nextInt(590) + 10, rnd.nextInt(150) + 20, panelPlane.getWidth(), panelPlane.getHeight()-panelNavig.getHeight()-panelButton.getHeight() );
+        panelPlane.add(draw);
+        framePlane.repaint();
+        framePlane.setVisible(true);
+    }
+}
