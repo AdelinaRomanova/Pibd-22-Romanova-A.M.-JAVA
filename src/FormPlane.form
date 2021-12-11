@@ -2,29 +2,45 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="FormPlane">
   <grid id="27dc6" binding="panelPlane" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="707" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="d6a36" binding="panelButton" layout-manager="BorderLayout" hgap="0" vgap="0">
+      <grid id="d6a36" binding="panelButton" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="3">
         <constraints border-constraint="North"/>
         <properties/>
         <border type="none"/>
         <children>
+          <component id="3b709" class="javax.swing.JButton" binding="btnCreateWarplane">
+            <constraints/>
+            <properties>
+              <text value="Создать военный самолёт"/>
+            </properties>
+          </component>
           <component id="7a95f" class="javax.swing.JButton" binding="btnCreateStorm">
-            <constraints border-constraint="West"/>
+            <constraints/>
             <properties>
               <text value=" Создать штурмовик"/>
             </properties>
           </component>
           <component id="d0030" class="javax.swing.JComboBox" binding="comboBoxRockets">
-            <constraints border-constraint="East"/>
+            <constraints/>
             <properties>
               <model>
                 <item value="2 ракеты"/>
                 <item value="4 ракеты"/>
                 <item value="6 ракет"/>
+              </model>
+            </properties>
+          </component>
+          <component id="4937f" class="javax.swing.JComboBox" binding="comboBoxTypeRock">
+            <constraints/>
+            <properties>
+              <model>
+                <item value="Овальные"/>
+                <item value="Прямоугольные"/>
+                <item value="Треугольные"/>
               </model>
             </properties>
           </component>
