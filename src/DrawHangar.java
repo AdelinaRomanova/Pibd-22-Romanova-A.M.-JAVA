@@ -1,21 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
-public class DrawHangar extends JComponent {
-    private Hangar<Warplane, IRockets> hangar;
+public class DrawHangar extends JPanel {
+    private  HangarCollection hangarCollection;
+    private String selectedItem = null;
 
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        if (hangar != null){
-            hangar.Draw(g);
+    @Override
+    public void paint(Graphics g) {
+        if (selectedItem != null) {
+            if (hangarCollection != null) {
+                hangarCollection.get(selectedItem).Draw(g);
+            }
         }
-        super.repaint();
     }
 
-    public void setHangar(Hangar<Warplane, IRockets> hangar){
-        this.hangar = hangar;
+    public void setSelectedItem(String selectedItem) {
+        this.selectedItem = selectedItem;
     }
 
-    public Hangar<Warplane, IRockets> getHangar(){
-        return hangar;
+    public DrawHangar(HangarCollection hangarCollection) {
+        this.hangarCollection = hangarCollection;
     }
 }

@@ -1,8 +1,11 @@
 import java.awt.*;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Hangar<T extends ITransport, R extends IRockets> {
-    private T[] _places;
+    private List<T> _places;
+    private int _maxCount;
     private int pictureWidth;
     private int pictureHeight;
     private int _placeSizeWidth = 280;
@@ -12,32 +15,30 @@ public class Hangar<T extends ITransport, R extends IRockets> {
     {
         int width = picWidth / _placeSizeWidth;
         int height = picHeight / _placeSizeHeight;
-        _places = (T[]) Array.newInstance(ITransport.class, width*height);
+        _maxCount = width*height;
+        _places = new ArrayList<>();
         pictureWidth = picWidth;
         pictureHeight = picHeight;
     } // конструктор
 
     public int OperationAdd(T plane)
     {
-        for (int i = 0; i < _places.length; i++)
+        if (_places.size() < _maxCount)
         {
-            if (_places[i] == null)
-            {
-                _places[i] = plane;
-                return i;
-            }
+            _places.add(plane);
+            return _places.size();
         }
         return -1;
     } // Перегрузка оператора сложения
 
     public  T OperationDel(int index)
     {
-        if (index >= 0 && index < _places.length)
+        if (index >= 0 && index < _maxCount)
         {
-            if (_places[index] != null)
+            if (_places.get(index) != null)
             {
-                T plane = _places[index];
-                _places[index] = null;
+                T plane = _places.get(index);
+                _places.remove(index);
                 return plane;
             }
             else
@@ -54,13 +55,13 @@ public class Hangar<T extends ITransport, R extends IRockets> {
     public boolean OperationDop1(Hangar<T, R> hangar1, Hangar<T, R> hangar2) {
         int k1 = 0;
         int k2 = 0;
-        for (int i = 0; i < hangar1._places.length; i++) {
-            if (hangar1._places[i] != null) {
+        for (int i = 0; i < hangar1._places.size(); i++) {
+            if (hangar1._places.get(i) != null) {
                 k1++;
             }
         }
-        for (int i = 0; i < hangar2._places.length; i++) {
-            if (hangar2._places[i] != null) {
+        for (int i = 0; i < hangar2._places.size(); i++) {
+            if (hangar2._places.get(i) != null) {
                 k2++;
             }
         }
@@ -73,13 +74,13 @@ public class Hangar<T extends ITransport, R extends IRockets> {
     public boolean OperationDop2(Hangar<T, R> hangar1, Hangar<T, R> hangar2) {
         int k1 = 0;
         int k2 = 0;
-        for (int i = 0; i < hangar1._places.length; i++) {
-            if (hangar1._places[i] != null) {
+        for (int i = 0; i < hangar1._places.size(); i++) {
+            if (hangar1._places.get(i) != null) {
                 k1++;
             }
         }
-        for (int i = 0; i < hangar2._places.length; i++) {
-            if (hangar2._places[i] != null) {
+        for (int i = 0; i < hangar2._places.size(); i++) {
+            if (hangar2._places.get(i) != null) {
                 k2++;
             }
         }
@@ -92,11 +93,11 @@ public class Hangar<T extends ITransport, R extends IRockets> {
     {
         DrawMarking(g);
 
-        for (int i = 0; i < _places.length; ++i)
+        for (int i = 0; i < _places.size(); ++i)
         {
-            if (_places[i] != null) {
-                _places[i].SetPosition(8 + i % 4 * _placeSizeWidth, i / 4 * _placeSizeHeight + 5, pictureWidth, pictureHeight);
-                _places[i].DrawTransport(g);
+            if (_places.get(i) != null) {
+                _places.get(i).SetPosition(8 + i % 4 * _placeSizeWidth, i / 4 * _placeSizeHeight + 5, pictureWidth, pictureHeight);
+                _places.get(i).DrawTransport(g);
             }
         }
     } // Метод отрисовки парковки
@@ -115,4 +116,11 @@ public class Hangar<T extends ITransport, R extends IRockets> {
             g2.drawLine(i * _placeSizeWidth, 0, i * _placeSizeWidth, (pictureHeight / _placeSizeHeight) * _placeSizeHeight);
         }
     } // Метод отрисовки разметки парковочных мест
+
+    public T getVehicle(int index) {
+        if (index >= 0 && index < _places.size()) {
+            return _places.get(index);
+        }
+        return null;
+    }
 }
