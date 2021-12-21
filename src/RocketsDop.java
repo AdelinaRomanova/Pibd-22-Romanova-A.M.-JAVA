@@ -22,7 +22,7 @@ public class RocketsDop implements IRockets {
 
             g.fillOval(_startPosX + 75, _startPosY + 165, 27, 15);
             g.fillOval(_startPosX + 75, _startPosY + 50, 27, 15);
-            g.setColor(MainColor);
+            g.setColor(DopColor);
             g.drawOval(_startPosX + 75, _startPosY + 165, 27, 15);
             g.drawOval(_startPosX + 75, _startPosY + 50, 27, 15);
         }
@@ -31,7 +31,7 @@ public class RocketsDop implements IRockets {
             g.setColor(DopColor);
             g.fillOval(_startPosX + 70, _startPosY + 140, 40, 20);
             g.fillOval(_startPosX + 70, _startPosY + 70, 40, 20);
-            g.setColor(MainColor);
+            g.setColor(DopColor);
             g.drawOval(_startPosX + 70, _startPosY + 140, 40, 20);
             g.drawOval(_startPosX + 70, _startPosY + 70, 40, 20);
         }
@@ -40,7 +40,7 @@ public class RocketsDop implements IRockets {
             g.setColor(DopColor);
             g.fillOval(_startPosX + 85, _startPosY + 190, 15, 10);
             g.fillOval(_startPosX + 80, _startPosY + 30, 15, 10);
-            g.setColor(MainColor);
+            g.setColor(DopColor);
             g.drawOval(_startPosX + 85, _startPosY + 190, 15, 10);
             g.drawOval(_startPosX + 80, _startPosY + 30, 15, 10);
         }

@@ -11,15 +11,12 @@ public class FormHangar {
     private JPanel panelTakePlane;
     private JButton btnTakePlane;
     private JTextArea textAreaPlace;
-    private JButton btnCreateWarplane;
-    private JButton btnCreateStorm;
-    private JComboBox comboBoxTypeRock;
-    private JComboBox comboBoxCountRock;
     private JTextField textBoxNameHangar;
     private JButton btnAddHangar;
     private JList listBoxHangars;
     private JButton btnDelHangar;
     private JButton btnSetPlane;
+    private JButton btnAddPlane;
 
     private JFrame frameHangar;
     private Stormtrooper storm;
@@ -42,8 +39,7 @@ public class FormHangar {
         listBoxHangars.setModel(hangarList);
         planeQueueVehicles = new LinkedList<>();
 
-        btnCreateWarplane.addActionListener(e -> createWarplane());
-        btnCreateStorm.addActionListener(e -> createStorm());
+        btnAddPlane.addActionListener(e -> createPLane());
         btnTakePlane.addActionListener(e -> takePlane());
         btnDelHangar.addActionListener(e -> delParking());
         btnAddHangar.addActionListener(e -> addParking());
@@ -53,34 +49,18 @@ public class FormHangar {
         frameHangar.repaint();
     }
 
-    private void createWarplane(){
-        Random rnd = new Random();
-        Color selectedColor = new JColorChooser().showDialog(frameHangar, "Выберите цвет", Color.YELLOW);
-        if (selectedColor != null){
-            Warplane plane = new Warplane(rnd.nextInt(200)+100, rnd.nextInt(2000)+1000, selectedColor);
-            if(hangarCollection.get((String) listBoxHangars.getSelectedValue()).OperationAdd(plane) != -1){
+    private void createPLane() {
+        FormPlaneConfig frameConfig = new FormPlaneConfig(this);
+    }
+    public void addPlane(Warplane plane) {
+        if (plane != null && listBoxHangars.getSelectedIndex() >= 0) {
+            if (((hangarCollection.get((String) listBoxHangars.getSelectedValue()).OperationAdd(plane))) !=-1) {
                 frameHangar.repaint();
-            }
-            else {JOptionPane.showMessageDialog(frameHangar, "Ангар полный");}
-        }
-    }
-
-    private void createStorm(){
-        Random rnd = new Random();
-        Color selectedColor = new JColorChooser().showDialog(frameHangar, "Выберите цвет", Color.YELLOW);
-        if (selectedColor != null){
-            Color selectedColorDop = new JColorChooser().showDialog(frameHangar, "Выберите цвет", Color.GRAY);
-            if (selectedColorDop != null) {
-                storm = new Stormtrooper(rnd.nextInt(200)+100, rnd.nextInt(2000)+1000, selectedColor, selectedColorDop, true, true, comboBoxCountRock.getSelectedIndex(), comboBoxTypeRock.getSelectedItem().toString());
-                if (hangarCollection.get((String) listBoxHangars.getSelectedValue()).OperationAdd(storm) != -1) {
-                    frameHangar.repaint();
-                } else {
-                    JOptionPane.showMessageDialog(frameHangar, "Ангар полный");
-                }
+            } else {
+                JOptionPane.showMessageDialog(frameHangar, "Самолёт не удалось приземлить");
             }
         }
     }
-
     private void takePlane(){
         if (listBoxHangars.getSelectedIndex() >= 0) {
             if (!textBoxNameHangar.getText().equals("")) {
@@ -102,7 +82,6 @@ public class FormHangar {
             JOptionPane.showMessageDialog(frameHangar, "Ангар не выбран");
         }
     }
-
     private void setPlane() {
         if (!planeQueueVehicles.isEmpty()) {
             FormPlane formPlane = new FormPlane();
@@ -111,7 +90,6 @@ public class FormHangar {
             frameHangar.repaint();
         }
     }
-
     private void reloadLevels() {
         int index = listBoxHangars.getSelectedIndex();
         hangarList.removeAllElements();
@@ -127,7 +105,6 @@ public class FormHangar {
             listBoxHangars.setSelectedIndex(index);
         }
     }
-
     private void addParking() {
         if (!textBoxNameHangar.getText().equals("")) {
             hangarCollection.AddParking(textBoxNameHangar.getText());
@@ -137,7 +114,6 @@ public class FormHangar {
             JOptionPane.showMessageDialog(draw, "Введите название ангара");
         }
     }
-
     private void delParking() {
         if (listBoxHangars.getSelectedIndex() >= 0) {
             int result = JOptionPane.showConfirmDialog(draw, "Удалить ангар " + listBoxHangars.getSelectedValue() + "?");
@@ -150,7 +126,6 @@ public class FormHangar {
             JOptionPane.showMessageDialog(draw, "Ангар не выбран");
         }
     }
-
     private void listListener() {
         draw.setSelectedItem((String) listBoxHangars.getSelectedValue());
         frameHangar.repaint();

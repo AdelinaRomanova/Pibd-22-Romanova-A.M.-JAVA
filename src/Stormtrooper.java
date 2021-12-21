@@ -24,7 +24,7 @@ public class Stormtrooper extends Warplane {
 
     public boolean Rockets;
     public boolean getRockets() { return Rockets; }
-    public void setRockets(boolean Rockets) { Rockets = Rockets; }
+    public void setRockets(boolean Rockets) { this.Rockets = Rockets; }
 
     private IRockets TypeRockets;
 
@@ -88,5 +88,12 @@ public class Stormtrooper extends Warplane {
         if (Rockets){
             TypeRockets.DrawRockets(g, _startPosX, _startPosY, MainColor, DopColor);
         }
+    }
+
+    public void setRockets(IRockets rockets){
+        this.TypeRockets = rockets;
+    }
+    public void setNewDopColor(Color DopColor) {
+        this.DopColor = DopColor;
     }
 }
