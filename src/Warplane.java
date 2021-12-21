@@ -113,4 +113,8 @@ public class Warplane extends Vehicle {
         g.setColor(MainColor);
         g.drawPolygon(pol5);
     }
+    @Override
+    public void setNewMainColor(Color MainColor){
+        this.MainColor = MainColor;
+    }
 }
